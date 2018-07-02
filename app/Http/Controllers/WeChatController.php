@@ -3,9 +3,21 @@
 namespace App\Http\Controllers;
 
 use Log;
+use GuzzleHttp\Client;
 
 class WeChatController extends Controller
 {
+    private $api_url= "http://47.94.8.17:8124";
+
+    private function getBody($body)
+    {
+        $client = new Client();
+
+        $requests = $client->request('GET', $this->api_url, [
+            'query' => ['body' => $body]
+        ])->getbody()->getContents();
+        return json_decode($requests,true)["body"];
+    }
 
     /**
      * 处理微信的请求消息
@@ -20,17 +32,19 @@ class WeChatController extends Controller
         $app->server->push(function ($message) {
             switch ($message['MsgType']) {
         case 'event':
-            return '收到事件消息';
+            return  '欢迎关注我，智能语音翻译系统上线试运行中。您可以试着对我说一句普通话或者发一段文字，我将尝试为您翻译😄';
             break;
         case 'text':
-            return '收到文字消息';
+            return '翻译结果(新蒙文)：'.$this->getBody($message["Content"]);
+           // return  '欢迎关注我，智能语音翻译系统上线试运行中。您可以试着对我说一句话普通话，我将尝试为您翻译😄';
+
 
             break;
         case 'image':
             return '对不起，我暂时不能识别图片内容。';
             break;
         case 'voice':
-            return $message["Recognition"];
+            return '翻译结果(新蒙文)：'.$this->getBody($message["Recognition"]);
             break;
         case 'video':
             return '收到视频消息';
