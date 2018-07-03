@@ -18,3 +18,8 @@ Route::any('/wechat', 'WeChatController@serve');
 Route::get('/traslate', function () {
     return view('traslate/index');
 });
+
+Route::Any('CA/OrderNotify', 'JsApiWeiChatController@OrderNotify')->name('OrderNotify');
+Route::group(['prefix' => 'CA','middleware' =>'WechatVerify'], function () {
+    Route::Any('OrderCreate', 'JsApiWeiChatController@OrderCreate')->name('OrderCreate');
+});
