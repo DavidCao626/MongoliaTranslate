@@ -11,15 +11,38 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 Route::any('/wechat', 'WeChatController@serve');
-Route::get('/traslate', function () {
-    return view('traslate/index');
-});
+Route::any('/addmenu', 'WeChatController@addmenu');
 
 Route::Any('CA/OrderNotify', 'JsApiWeiChatController@OrderNotify')->name('OrderNotify');
-Route::group(['prefix' => 'CA','middleware' =>'WechatVerify'], function () {
-    Route::Any('OrderCreate', 'JsApiWeiChatController@OrderCreate')->name('OrderCreate');
+
+Route::group(['middleware' => ['web', 'wechat.oauth']], function () {
+    Route::Any('pay', 'JsApiWeiChatController@wechatJsapi');
+    
+    Route::get('/traslate', function () {
+        return view('traslate/index');
+    });
+    Route::group(['prefix' => 'CA'], function () {
+       
+        Route::Any('OrderCreate', 'JsApiWeiChatController@OrderCreate')->name('OrderCreate');
+    });
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['prefix' => 'sms'], function () {
+    Route::Any('send', 'SmsController@index');
+});
+
+Route::group(['prefix' => 'sms'], function () {
+    Route::Any('xsend', 'SmsController@store');
+});
+
+
+Route::resource('orders', 'OrdersController', ['only' => ['index', 'show', 'create', 'store', 'update', 'edit', 'destroy']]);

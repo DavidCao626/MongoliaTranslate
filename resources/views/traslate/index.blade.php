@@ -2,11 +2,10 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta name="description" content="">
-    <meta name="author" content="">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-Equiv="Cache-Control" Content="no-cache" />
+  <meta http-Equiv="Pragma" Content="no-cache" />
+  <meta http-Equiv="Expires" Content="0" />
     <link rel="icon" href="favicon.ico">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

@@ -19,6 +19,7 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "element-ui": "^2.4.3",
         "vant": "^1.1.10"
     }
 }

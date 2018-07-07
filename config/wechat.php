@@ -59,10 +59,10 @@ return [
      */
     'official_account' => [
         'default' => [
-            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx9035249dae731d1b'),         // AppID
-            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '09f91d8d1c00fd61fb8e8e0623bc918b'),    // AppSecret
-            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'qqww11'),           // Token
-            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', ''),                 // EncodingAESKey
+            'app_id' => env('WECHAT_OFFICIAL_ACCOUNT_APPID', 'wx70ee0181518b66ed'),         // AppID
+            'secret' => env('WECHAT_OFFICIAL_ACCOUNT_SECRET', '63d19107d159285f51f20a58defbab65'),    // AppSecret
+            'token' => env('WECHAT_OFFICIAL_ACCOUNT_TOKEN', 'T3ELV10kFiIjZYreZGFB'),           // Token
+            'aes_key' => env('WECHAT_OFFICIAL_ACCOUNT_AES_KEY', 'qcZvngyYERZBWok0ysL3wFVXeTnD9pIrtlvazIvAZgJ'),                 // EncodingAESKey
 
             /*
              * OAuth 配置
@@ -70,10 +70,10 @@ return [
              * scopes：公众平台（snsapi_userinfo / snsapi_base），开放平台：snsapi_login
              * callback：OAuth授权完成后的回调页地址(如果使用中间件，则随便填写。。。)
              */
-            // 'oauth' => [
-            //     'scopes'   => array_map('trim', explode(',', env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
-            //     'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/examples/oauth_callback.php'),
-            // ],
+             'oauth' => [
+                 'scopes'   => array_map('trim', explode(',', env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_SCOPES', 'snsapi_userinfo'))),
+                 'callback' => env('WECHAT_OFFICIAL_ACCOUNT_OAUTH_CALLBACK', '/oauthCallback'),
+         ],
         ],
     ],
 
@@ -112,7 +112,7 @@ return [
             'key'                => env('WECHAT_PAYMENT_KEY', '1qaz2wsx3edc4rfv5tgbNMGCA8942366'),
             'cert_path'          => env('WECHAT_PAYMENT_CERT_PATH', storage_path('cert/apiclient_cert.pem')),    // XXX: 绝对路径！！！！
             'key_path'           => env('WECHAT_PAYMENT_KEY_PATH', storage_path('cert/apiclient_key.pem')),      // XXX: 绝对路径！！！！
-            'notify_url'         => env('NOTIFY_URL', 'http://' . 'http://qq83303851.gicp.net/CA/OrderNotify'),                          // 默认支付结果通知地址
+            'notify_url'         => env('NOTIFY_URL', 'http://' . 'qq83303851.gicp.net/CA/OrderNotify'),                          // 默认支付结果通知地址
         ],
         // ...
     ],

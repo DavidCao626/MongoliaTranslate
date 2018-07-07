@@ -13,16 +13,16 @@ window.Vue = require("vue");
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-import Vant from "vant";
-import "vant/lib/vant-css/index.css";
-//import traslate from "./components/TraslateHome.vue";
-Vue.use(Vant);
+
 
 Vue.component(
   "example-component",
   require("./components/ExampleComponent.vue")
 );
+
 Vue.component("traslate", require("./components/TraslateHome.vue"));
+
+Vue.component("sms-send", require("./components/SmsSend.vue"));
 
 const app = new Vue({
   el: "#app"
