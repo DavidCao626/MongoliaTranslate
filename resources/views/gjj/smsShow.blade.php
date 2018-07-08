@@ -7,16 +7,15 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
   <!-- Styles -->
 </head>
 <body>
     <div id="app">
-           <sms-send></sms-send>
-       
+       <router-view></router-view>
     </div>
     <!-- Scripts -->
+
     <script src="{{ asset('js/app.js') }}"></script>
     <script>
     </script>
