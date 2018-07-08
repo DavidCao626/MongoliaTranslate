@@ -9,8 +9,11 @@
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
+        "maatwebsite/excel": "~2.1",
         "overtrue/easy-sms": "^1.1",
-        "overtrue/laravel-wechat": "~4.0"
+        "overtrue/laravel-wechat": "~4.0",
+        "predis/predis": "~1.0",
+        "rekkles/easyexcel": "^1.0"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

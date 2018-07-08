@@ -101,7 +101,11 @@
             </div>
         </div>
         <el-dialog title="上传联系人及内容" :visible.sync="centerDialogVisible" width="410px" center>
-            <el-upload class="upload-demo" :limit="1" drag action=".xlsx,.xls" name="myfile" on-success="onSuccess" on-error="onError">
+            <el-upload class="upload-demo" :limit="1" drag action="/excelToolUpAcc"
+             accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              name="myfile"   
+              :headers="tokey"
+              :on-success="onSuccess" :on-error="onError">
                 <i class="el-icon-upload"></i>
                 <div class="el-upload__text">将文件拖到此处，或
                     <em>点击上传</em>
@@ -120,6 +124,7 @@ export default {
       centerDialogVisible: false,
       dataTable: false,
       nodeState: 0,
+      tokey:{},
       tableData3: [
         {
           date: "2016-05-03",
@@ -265,12 +270,6 @@ export default {
           });
           this.nodeState = 1;
         })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
     },
     open1() {
       this.$confirm("将会清除以下全部数据, 是否继续?", "信息清空确认", {
@@ -284,21 +283,18 @@ export default {
             message: "删除成功!"
           });
         })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
     },
     onExceed() {},
-    onSuccess() {
+    onSuccess(response, file, fileList) {
       centerDialogVisible = false;
     },
     handleSelectionChange() {},
     onError() {
       this.$message.error("上传处理失败，请稍后再试");
     }
+  },
+  mounted(){
+       this.tokey['X-CSRF-TOKEN'] = document.head.querySelector('meta[name="csrf-token"]').content;
   }
 };
 </script>
