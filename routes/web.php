@@ -27,4 +27,5 @@ Route::group(['prefix' => 'sms'], function () {
     Route::Any('xsend', 'SmsController@store');
 });
 Route::Any('/excelToolUpAcc', 'SmsController@excelToolUp');
+Route::Any('/state', 'SmsController@state');
 

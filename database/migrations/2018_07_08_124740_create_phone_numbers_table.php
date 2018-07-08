@@ -17,8 +17,11 @@ class CreatePhoneNumbersTable extends Migration
             $table->increments('id')->index();
             $table->integer('aid')->comment('文件数据id');
 
-            $table->string('name')->index()->comment('手机号');
-            $table->text('description')->nullable()->comment('发送内容');
+            $table->string('phone')->index()->comment('手机号');
+            $table->text('nr')->nullable()->comment('发送内容');
+            $table->string('message')->index()->comment('返回消息');
+            $table->integer('isok')->comment('是否发送成功');
+
             $table->timestamps();
         });
     }
