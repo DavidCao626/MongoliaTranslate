@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 use EasyExcel\Read\ExcelToArray;
 use EasyExcel\Read\ChunkReadFilter;
 use App\Models\PhoneNumber;
-
+use Log;
 class SmsController extends Controller
 {
     public function readfile()
@@ -98,15 +98,15 @@ class SmsController extends Controller
         $config = ['firstRowAsIndex' => true];
           
         //分批获取Excel的数据（防止内存泄漏）
-        $ss=null;
+        //$ss=null;
         $chunk = new ChunkReadFilter();
        // for ($x=0; $x<=10; $x++) {
             $chunk->setRows(5000, 1);
             $data = new ExcelToArray($filePath, $config);
-            dd($data->loadByChunk($chunk)->getData());
+            //dd($data->loadByChunk($chunk)->getData());
             foreach ($data->loadByChunk($chunk)->getData() as $user) {
                 //dd($user['phone']. $user['nr']);
-                $this.store1($user['phone'], $user['nr']);
+                $this->store1($user['PHONE'], $user['NR']);
             }
         //}
        
@@ -118,23 +118,16 @@ class SmsController extends Controller
     }
     public function store1($phone, $body)
     {
+       // dd($phone. $body);
         try {
             $result = $easySms->send($phone, [
                 'data'  =>  "【呼市人社局】".$body
             ]);
         } catch (\Overtrue\EasySms\Exceptions\NoGatewayAvailableException $exception) {
             $message = $exception->getException('submail')->getMessage();
-            return response()->json([
-                'isok' => 'no',
-                'message' => $message ?? '短信发送异常'
-            ]);
+           
         }
 
-
-        return response()->json([
-            'isok' => 'ok',
-            'message'=>$phone
-        ]);
     }
     public function store(Request $request, EasySms $easySms)
     {
